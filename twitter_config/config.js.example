@@ -5,5 +5,4 @@ var data = {
   access_token_key: '',
   access_token_secret: ''
   }
-}
-module.exports = streamData;
+module.exports = data;
