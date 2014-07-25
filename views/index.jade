@@ -1,0 +1,16 @@
+html
+  head
+    title= "Real time Twitter feeds"
+    script(src='/socket.io/socket.io.js')
+    script(src='javascripts/jquery-1.11.1.js')
+    script(src='javascripts/client.js')
+    script(src='http://maps.googleapis.com/maps/api/js?libraries=places')
+    link(href='stylesheets/style.css', rel='stylesheet', type='text/css')
+block content
+  h1= Hello
+  p Welcome to Twitter streaming feed
+  div.tweet_location
+    div
+      span Tweet Counts
+      span Lat Long Location
+      span Address

@@ -1,0 +1,39 @@
+#!/usr/bin/env node
+var debug = require('debug')('twitter_stream');
+var app = require('../app');
+var twitter = require('ntwitter');
+var io = require('socket.io');
+var _ = require('underscore');
+var TConfig = require('../twitter_config/config')
+
+app.set('port', process.env.PORT || 3000);
+
+var server = app.listen(app.get('port'), function() {
+  debug('Express server listening on port ' + server.address().port);
+});
+
+
+// Start a Socket.IO listen
+var sockets = io.listen(server);
+
+var t = new twitter({
+    consumer_key: TConfig.consumer_key,               // <--- FILL ME IN
+    consumer_secret: TConfig.consumer_secret,         // <--- FILL ME IN
+    access_token_key: TConfig.access_token_key,       // <--- FILL ME IN
+    access_token_secret: TConfig.access_token_secret  // <--- FILL ME IN
+});
+
+// Tell the twitter API to filter on the watchSymbols
+t.stream('statuses/sample', { }, function(stream) {
+  // We have a connection. Now watch the 'data' event for incoming tweets.
+  stream.on('data', function(tweet) {
+    var claimed = false;
+    // Make sure it was a valid tweet
+    if (tweet.text !== undefined) {
+      var text = tweet.text.toLowerCase();
+      if (tweet.geo != null) {
+        sockets.sockets.emit('data', tweet.geo);
+      }
+    }
+  });
+});

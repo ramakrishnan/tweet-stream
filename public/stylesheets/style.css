@@ -1,0 +1,25 @@
+body {
+  padding: 50px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+a {
+  color: #00B7FF;
+}
+
+.tweet_location > div  > span {
+  padding-bottom: 5px;
+  padding-right: 5px;
+}
+
+.tweet_location > div  > span.count {
+  padding-right: 85px;
+}
+
+.tweet_location > div  > span.caption {
+  padding-right: 5px;
+}
+
+.tweet_location > div  > span.address {
+  padding-left: 25px;
+}
